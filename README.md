@@ -1,15 +1,15 @@
 Step to Follow for Implementation ---->
 
 
-================= Install and Configure the Jenkins-Master & Jenkins-Agent ========================
+============ Install and Configure the Jenkins-Master ================
 
 ## Install Java
-$ sudo apt update
-$ sudo apt upgrade
-$ sudo nano /etc/hostname
-$ sudo init 6
-$ sudo apt install openjdk-17-jre
-$ java -version
+  $ sudo apt update
+  $ sudo apt upgrade
+  $ sudo nano /etc/hostname
+  $ sudo init 6
+  $ sudo apt install openjdk-17-jre
+  $ java -version
 
 ## Install Jenkins
 Refer--https://www.jenkins.io/doc/book/installing/linux/
@@ -22,45 +22,41 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 sudo apt-get install jenkins
 
-$ sudo systemctl enable jenkins       //Enable the Jenkins service to start at boot
-$ sudo systemctl start jenkins        //Start Jenkins as a service
-$ systemctl status jenkins
+  $ sudo systemctl enable jenkins       //Enable the Jenkins service to start at boot
+  $ sudo systemctl start jenkins        //Start Jenkins as a service
+  $ systemctl status jenkins
 
 
-$ sudo nano /etc/ssh/sshd_config
-$ sudo service sshd reload or $sudo systemctl reload ssh
-$ ssh-keygen OR $ ssh-keygen -t ed25519
-$ cd .ssh
+  $ sudo nano /etc/ssh/sshd_config
+  $ sudo service sshd reload or $sudo systemctl reload ssh
+  $ ssh-keygen OR $ ssh-keygen -t ed25519
+  $ cd .ssh
 
 
 
 ================= Install and Configure the Jenkins-Agent ========================
 
 ## Install Java
-$ sudo apt update
-$ sudo apt upgrade
-$ sudo nano /etc/hostname
-$ sudo init 6
-$ sudo apt install openjdk-17-jre
-$ java -version
+  $ sudo apt update
+  $ sudo apt upgrade
+  $ sudo nano /etc/hostname
+  $ sudo init 6
+  $ sudo apt install openjdk-17-jre
+  $ java -version
 
 ## Install Docker
-$ sudo apt-get install docker.io
-$ sudo usermod -aG docker $USER
-$ sudo init 6
+  $ sudo apt-get install docker.io
+  $ sudo usermod -aG docker $USER
+  $ sudo init 6
 
+  $ sudo nano /etc/ssh/sshd_config
+  $ sudo service sshd reload or $sudo systemctl reload ssh
 
-$ sudo nano /etc/ssh/sshd_config
-$ sudo service sshd reload or $sudo systemctl reload ssh
-
-
-$ sudo apt upgrade
-$ sudo apt upgrade
-
-
-
-
-======================= Install and Configure the SonarQube =========================================
+  $ sudo apt upgrade
+  $ sudo apt upgrade
+  
+  
+  =============== Install and Configure the SonarQube ===================
 
 
 ## Update Package Repository and Upgrade Packages
@@ -152,7 +148,8 @@ $ sudo vim /etc/systemd/system/sonar.service
 ## Watch log files and monitor for startup
      $ sudo tail -f /opt/sonarqube/logs/sonar.log
 
-============================================================= Setup Bootstrap Server for eksctl and Setup Kubernetes using eksctl =============================================================
+==================== Setup Bootstrap Server for eksctl and Setup Kubernetes using eksctl ====================
+
 ## Install AWS Cli on the above EC2
 Refer--https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 $ sudo su
@@ -190,7 +187,8 @@ $ eksctl create cluster --name virtualtechbox-cluster \
 
 $ kubectl get nodes
 
-============================================================= ArgoCD Installation on EKS Cluster and Add EKS Cluster to ArgoCD =============================================================
+=================== ArgoCD Installation on EKS Cluster and Add EKS Cluster to ArgoCD ========================
+
 1 ) First, create a namespace
     $ kubectl create namespace argocd
 
@@ -228,8 +226,10 @@ $ kubectl get nodes
      $ argocd cluster add i-08b9d0ff0409f48e7@virtualtechbox-cluster.ap-south-1.eksctl.io --name virtualtechbox-eks-cluster
 
 13 ) $ kubectl get svc
-============================================================= Cleanup =============================================================
-$ kubectl get all
-$ kubectl delete deployment.apps/virtualtechbox-regapp       //it will delete the deployment
-$ kubectl delete service/virtualtechbox-service              //it will delete the service
-$ eksctl delete cluster virtualtechbox --region ap-south-1     OR    eksctl delete cluster --region=ap-south-1 --name=virtualtechbox-cluster      //it will delete the EKS cluster
+
+=============================== Cleanup ===============================
+
+  $ kubectl get all
+  $ kubectl delete deployment.apps/virtualtechbox-regapp       //it will delete the deployment
+  $ kubectl delete service/virtualtechbox-service              //it will delete the service
+  $ eksctl delete cluster virtualtechbox --region ap-south-1     OR    eksctl delete cluster --region=ap-south-1 --name=virtualtechbox-cluster      //it will delete the EKS cluster
